@@ -41,6 +41,24 @@
       "description": "Treadmill Parts For Free",
       "image": "./images/treadmill.jpg",
       "location": "East Flatbush"
+    },
+    {
+      "description": "beautiful",
+      "image": "https://m.media-amazon.com/images/I/71BQ1zyPqqL._AC_SX679_.jpg",
+      "location": "Brooklyn",
+      "id": 9
+    },
+    {
+      "description": "airpods pro",
+      "image": "https://scene7.samsclub.com/is/image/samsclub/0019425272124_B?$DT_PDP_Image$",
+      "location": "Brooklyn",
+      "id": 15
+    },
+    {
+      "description": "book mark",
+      "image": "https://i.etsystatic.com/8872960/r/il/659939/2456161447/il_1588xN.2456161447_svg4.jpg",
+      "location": "walmart",
+      "id": 22
     }
   ]
 }

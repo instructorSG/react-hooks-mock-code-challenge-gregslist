@@ -1,12 +1,60 @@
-import React from "react";
-// import ListingCard from "./ListingCard";
+import React, {useState, useEffect} from "react";
+import AddListing from "./AddListing";
+import ListingCard from "./ListingCard";
+import SortListings from "./SortListings";
 
-function ListingsContainer() {
+
+function ListingsContainer({ search, id }) {
+  const [ lCards, setLCards ] = useState([])
+  const [ sortBy, setSortBy ] = useState('id')
+
+  useEffect(() => {
+    fetch('http://localhost:6001/listings')
+      .then(res => res.json())
+      .then(listings => setLCards(listings))
+  }, [])
+
+  const deleteListing = (id) => {
+    const newCards = lCards.filter(l => l.id !== id)
+    setLCards(newCards)
+  }
+
+  const filteredListings = lCards.filter((l) => l.description.toLowerCase().includes(search.toLowerCase()))
+
+  const sortedListings =
+    filteredListings.sort((cardA, cardB) => {
+      if (sortBy === "id") {
+        return cardA[ sortBy ] - cardB[ sortBy ]
+      } else {
+        return cardA[ sortBy ].localeCompare(cardB[ sortBy ])
+      }
+    })
+
+  const listingItems = sortedListings.map((c) =>
+    <ListingCard
+      key={ c.id }
+      card={ c }
+      onDel={ deleteListing }
+    />
+  )
+
+  const addListing = (newListing) => {
+    const newCards = [ newListing, ...lCards ]
+    setLCards(newCards)
+  }
+
+
   return (
     <main>
-      <ul className="cards">
-        {/* use the ListingCard component to display listings */}
-      </ul>
+      <AddListing addListing={ addListing } />
+      <SortListings
+        onChange={ (e) => {
+          setSortBy(e.target.value)
+        } }
+        value={ sortBy }
+     />
+      <h1>Listings</h1>
+      <ul className="cards">{ listingItems}</ul>
     </main>
   );
 }
