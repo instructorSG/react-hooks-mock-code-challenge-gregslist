@@ -19,18 +19,15 @@ function ListingsContainer({ search, id }) {
     setLCards(newCards)
   }
 
-  const filteredListings = lCards.filter((l) => l.description.toLowerCase().includes(search.toLowerCase()))
-
-  const sortedListings =
-    filteredListings.sort((cardA, cardB) => {
+  const listingItems = lCards.filter((l) => l.description.toLowerCase().includes(search.toLowerCase()))
+  .sort((cardA, cardB) => {
       if (sortBy === "id") {
         return cardA[ sortBy ] - cardB[ sortBy ]
       } else {
         return cardA[ sortBy ].localeCompare(cardB[ sortBy ])
       }
-    })
-
-  const listingItems = sortedListings.map((c) =>
+  })
+    .map((c) =>
     <ListingCard
       key={ c.id }
       card={ c }
